@@ -8,8 +8,8 @@ const heap = new Array(32).fill(undefined);
 heap.push(undefined, null, true, false);
 let heap_next = heap.length;
 const cachedTextEncoder = new TextEncoder();
-let cachedUint8Memory0:Uint8Array;
-let cachedInt32Memory0:Int32Array;
+let cachedUint8Memory0:Uint8Array = new Uint8Array();
+let cachedInt32Memory0:Int32Array = new Int32Array();;
 let WASM_VECTOR_LEN = 0;
 const encodeString = function (arg:string, view:Uint8Array) {
   return cachedTextEncoder.encodeInto(arg, view);

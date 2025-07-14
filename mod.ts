@@ -7,9 +7,8 @@ import type {
 import { imports } from "./lib/deno_swc.generated.js";
 import data from './lib/deno_swc_bg.wasm' with { type: 'bytes' };
 const wasmCode = decompress(data);
-const { instance } = await WebAssembly.instantiate(wasmCode, imports);
-
-
+const ref:{wasm?:WebAssembly.Exports} = {};
+ref.wasm = (await WebAssembly.instantiate(wasmCode, imports(ref))).instance.exports;
 export function parse(source: string, opts: ParseOptions): Program {
   // @ts-ignore `parseSync` is part of export unless different wasm
   return instance.exports.parseSync(source, opts);

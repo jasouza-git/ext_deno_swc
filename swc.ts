@@ -5,6 +5,7 @@ import { decompress } from "https://deno.land/x/lz4@v0.1.2/mod.ts";
 
 /* ----- VARIABLES ----- */
 const heap = new Array(32).fill(undefined);
+heap.push(undefined, null, true, false);
 let heap_next = heap.length;
 const cachedTextEncoder = new TextEncoder();
 let cachedUint8Memory0:Uint8Array;

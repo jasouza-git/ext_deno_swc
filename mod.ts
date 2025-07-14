@@ -11,15 +11,15 @@ const ref:{wasm?:WebAssembly.Exports} = {};
 ref.wasm = (await WebAssembly.instantiate(wasmCode, imports(ref))).instance.exports;
 export function parse(source: string, opts: ParseOptions): Program {
   // @ts-ignore `parseSync` is part of export unless different wasm
-  return instance.exports.parseSync(source, opts);
+  return ref.wasm.parseSync(source, opts);
 }
 
 export function print(program: Program, opts?: Config): { code: string } {
   // @ts-ignore `printSync` is part of export unless different wasm
-  return instance.exports.printSync(program, opts || {});
+  return ref.wasm.printSync(program, opts || {});
 }
 
 export function transform(source: string, opts: Config): { code: string } {
   // @ts-ignore `transformSync` is part of export unless different wasm
-  return instance.exports.transformSync(source, opts);
+  return ref.wasm.transformSync(source, opts);
 }

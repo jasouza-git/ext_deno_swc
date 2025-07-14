@@ -4,18 +4,23 @@ import type {
   ParseOptions,
   Program,
 } from "https://esm.sh/@swc/core@1.2.212/types.d.ts";
-import { instantiate } from "./lib/deno_swc.generated.js";
+import { imports } from "./lib/deno_swc.generated.js";
+import data from './lib/deno_swc_bg.wasm' with { type: 'bytes' };
+const wasmCode = decompress(data);
+const { instance } = await WebAssembly.instantiate(wasmCode, imports);
 
-const { parseSync, printSync, transformSync } = await instantiate(decompress);
 
 export function parse(source: string, opts: ParseOptions): Program {
-  return parseSync(source, opts);
+  // @ts-ignore `parseSync` is part of export unless different wasm
+  return instance.exports.parseSync(source, opts);
 }
 
 export function print(program: Program, opts?: Config): { code: string } {
-  return printSync(program, opts || {});
+  // @ts-ignore `printSync` is part of export unless different wasm
+  return instance.exports.printSync(program, opts || {});
 }
 
 export function transform(source: string, opts: Config): { code: string } {
-  return transformSync(source, opts);
+  // @ts-ignore `transformSync` is part of export unless different wasm
+  return instance.exports.transformSync(source, opts);
 }

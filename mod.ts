@@ -10,6 +10,16 @@ import * as types from './types.d.ts';
 
 export { types };
 
+export type node =
+  | types.Declaration
+  | types.Expression
+  | types.Pattern
+  | types.VariableDeclarator
+  | types.ModuleItem
+  | types.Super
+  | types.Import
+  | types.Statement;
+
 const { parseSync, printSync, transformSync } = await instantiate(decompress, wasmBytes);
 
 export function parse(source: string, opts: ParseOptions): Program {

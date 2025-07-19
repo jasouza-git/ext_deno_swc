@@ -10,6 +10,8 @@
  </p>
 </p>
 
+<h1 style="color:red"><b>NOT THE ORIGINAL: ORGINAL AT https://github.com/littledivy/deno_swc (TEMPORARY USE)</b></h1>
+
 ![ci](https://github.com/littledivy/deno_swc/workflows/ci/badge.svg)
 ![](https://img.shields.io/github/v/release/littledivy/deno_swc?style=plastic)
 

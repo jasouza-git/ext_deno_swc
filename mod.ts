@@ -5,7 +5,10 @@ import type {
   Program,
 } from "./types.d.ts";
 import { instantiate } from "./lib/deno_swc.generated.js";
-import { wasmBytes } from "./lib/wasm_base64.ts";
+import { wasmBytes } from "./lib/deno_swc_bg.wasm.bytes.ts";
+import * as types from './types.d.ts';
+
+export { types };
 
 const { parseSync, printSync, transformSync } = await instantiate(decompress, wasmBytes);
 
